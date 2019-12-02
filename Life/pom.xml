@@ -5,7 +5,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.neu.coe.mgen</groupId>
-    <artifactId>INFO6205</artifactId>
+    <artifactId>Life</artifactId>
     <version>1</version>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

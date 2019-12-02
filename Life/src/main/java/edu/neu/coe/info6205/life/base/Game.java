@@ -71,6 +71,8 @@ public class Game implements Generational<Game, Grid>, Countable, Renderable {
 		public static void main(String[] args) {
 //				String patternName = args.length > 0 ? args[0] : "Blip";
 				String patternName = "Glider1";
+
+				// this is a test
 				System.out.println("Game of Life with starting pattern: " + patternName);
 				final String pattern = Library.get(patternName);
 				run(pattern);
