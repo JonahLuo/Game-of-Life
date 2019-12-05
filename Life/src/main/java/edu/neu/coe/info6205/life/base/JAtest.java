@@ -3,23 +3,12 @@ package edu.neu.coe.info6205.life.base;
 import io.jenetics.*;
 import io.jenetics.engine.Engine;
 import io.jenetics.engine.EvolutionResult;
+import io.jenetics.engine.EvolutionStatistics;
 import io.jenetics.util.Factory;
 
 public class JAtest {
 
     public static int fitness(Genotype<BitGene> gt){
-        int value = 0;
-//        byte[] x = ((BitChromosome) gt.getChromosome(0)).toByteArray();
-//        byte[] y = ((BitChromosome) gt.getChromosome(1)).toByteArray();
-//        for(int i = 0; i<x.length; i++){
-//            byte tempX = x[i];
-//            byte tempY = y[i];
-//            int mask = 1;
-//            for(int j = 0; j< 8; j++){
-//                if((mask & tempX & tempY) != 0) value++;
-//                mask = mask << 1;
-//            }
-//        }
         final Game.Behavior generations = Game.run(0L, genoToPattern(gt));
         System.out.println("Ending Game of Life after " + generations + " generations");
         return (int)generations.generation;
@@ -46,17 +35,25 @@ public class JAtest {
         Factory<Genotype<BitGene>> gtf = Genotype.of(
                 BitChromosome.of(8,0.5), 8);
 
+        // 2.) Set up the engine - the evolution environment
         Engine<BitGene, Integer> engine = Engine
                 .builder(JAtest::fitness,gtf)
                 .populationSize(100)
+                .maximizing()
                 .alterers(new Mutator<>(0.5))
                 .build();
 
+        // 3.) Set up the statistic record
+        final EvolutionStatistics<Integer, ?> statistics = EvolutionStatistics.ofNumber();
+
+        // 4.) Do the evolution and collect the best individual
         final Phenotype<BitGene, Integer> phenotype = engine.stream()
                 .limit(10)
+                .peek(statistics)
                 .collect(EvolutionResult.toBestPhenotype());
 
 //
+        System.out.println(statistics);
         System.out.println(phenotype);
         System.out.println(genoToPattern(phenotype.getGenotype()));
 
