@@ -8,7 +8,7 @@ import io.jenetics.prngine.LCG64ShiftRandom;
 import io.jenetics.util.Factory;
 import io.jenetics.util.RandomRegistry;
 
-public class JAtest {
+public class SimpleJA {
 
     public static int fitness(Genotype<BitGene> gt){
         final Game.Behavior generations = Game.run(0L, genoToPattern(gt));
@@ -46,7 +46,7 @@ public class JAtest {
 
         // 2.) Set up the engine - the evolution environment
         Engine<BitGene, Integer> engine = Engine
-                .builder(JAtest::fitness,gtf)
+                .builder(SimpleJA::fitness,gtf)
                 .populationSize(100)
                 .maximizing()
                 .alterers(new Mutator<>(0.5))
