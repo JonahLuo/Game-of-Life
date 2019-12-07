@@ -28,14 +28,15 @@ public class SimpleJA {
             }
         }
 
-        sb.deleteCharAt(sb.lastIndexOf(", "));
+        sb.deleteCharAt(sb.lastIndexOf(","));
+        sb.deleteCharAt(sb.lastIndexOf(" "));
         return sb.toString();
     }
 
     public static void main(String[] args){
         // 0.) Define the randomness
-//        Long seed  = System.currentTimeMillis();
-        Long seed = Long.parseLong("1575698857021");
+        Long seed  = System.currentTimeMillis();
+//        Long seed = Long.parseLong("1575698857021");
         // RandomRegistry.setRandom(new LCG64ShiftRandom.ThreadLocal());
         RandomRegistry.setRandom(new LCG64ShiftRandom.ThreadSafe(seed));
 
@@ -61,27 +62,11 @@ public class SimpleJA {
                 .peek(statistics)
                 .collect(EvolutionResult.toBestPhenotype());
 
-//
         System.out.println(statistics);
         System.out.println(phenotype);
         System.out.println(genoToPattern(phenotype.getGenotype()));
         System.out.println(seed);
-
-//        Genotype<BitGene> genotype = Genotype.of(BitChromosome.of(8,0.5),8);
-//        BitChromosome bt = (BitChromosome) genotype.getChromosome(0);
-//        byte[] result = bt.toByteArray();
-//
-//        System.out.println(genotype);
-//        System.out.print(genotype.getChromosome(0) + " ");
-//        System.out.println(genotype.getChromosome(1));
-//        System.out.print(genotype.getChromosome(0).getGene(4).booleanValue() + " ");
-//        System.out.println(genotype.getChromosome(1).getGene(5).booleanValue());
-//        System.out.println(genoToPattern(genotype));
-//        System.out.println(genotype.length());
-//        System.out.println(genotype.getChromosome(40));
-//        System.out.println(genotype.getChromosome(40).getGene(15).booleanValue());
-//        System.out.println(result.length);
-//        System.out.println(genotype.getChromosome().length());
+        System.out.println(statistics.getAltered());
 
     }
 

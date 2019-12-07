@@ -112,6 +112,7 @@ public class Library {
 				put("Result1", Result1);
 				put("Result2", Result2);
 				put("Result3", Result3);
+				put("Result4", Result4);
 				put("Result64", Result64);
 		}
 }
