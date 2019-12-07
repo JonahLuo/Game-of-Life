@@ -4,7 +4,9 @@ import io.jenetics.*;
 import io.jenetics.engine.Engine;
 import io.jenetics.engine.EvolutionResult;
 import io.jenetics.engine.EvolutionStatistics;
+import io.jenetics.prngine.LCG64ShiftRandom;
 import io.jenetics.util.Factory;
+import io.jenetics.util.RandomRegistry;
 
 public class JAtest {
 
@@ -31,9 +33,16 @@ public class JAtest {
     }
 
     public static void main(String[] args){
+        // 0.) Define the randomness
+//        Long seed  = System.currentTimeMillis();
+        Long seed = Long.parseLong("1575698857021");
+        // RandomRegistry.setRandom(new LCG64ShiftRandom.ThreadLocal());
+        RandomRegistry.setRandom(new LCG64ShiftRandom.ThreadSafe(seed));
+
         // 1.) Define the genotype (factory) suitable for the problem
         Factory<Genotype<BitGene>> gtf = Genotype.of(
                 BitChromosome.of(8,0.5), 8);
+
 
         // 2.) Set up the engine - the evolution environment
         Engine<BitGene, Integer> engine = Engine
@@ -56,6 +65,7 @@ public class JAtest {
         System.out.println(statistics);
         System.out.println(phenotype);
         System.out.println(genoToPattern(phenotype.getGenotype()));
+        System.out.println(seed);
 
 //        Genotype<BitGene> genotype = Genotype.of(BitChromosome.of(8,0.5),8);
 //        BitChromosome bt = (BitChromosome) genotype.getChromosome(0);
