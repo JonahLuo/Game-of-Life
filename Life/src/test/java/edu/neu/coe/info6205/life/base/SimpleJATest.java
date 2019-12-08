@@ -60,7 +60,7 @@ public class SimpleJATest {
 
 
     @Test
-    public void genToPatternTeat(){
+    public void genToPatternTest(){
         Genotype<BitGene> genotype = Genotype.of(BitChromosome.of(8,0.5), 8);
         int counts  = 0;
         for(int i =0; i<8; i++){
