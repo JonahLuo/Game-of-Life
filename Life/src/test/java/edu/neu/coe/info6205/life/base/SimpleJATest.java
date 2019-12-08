@@ -68,7 +68,14 @@ public class SimpleJATest {
         }
         String temp = SimpleJA.genoToPattern(genotype);
         String[] temp1 = temp.split(", ");
-
         assertEquals(counts, temp1.length);
+        if(counts != 0){
+            int x =  Integer.parseInt(temp1[0].charAt(0) + "");
+            int y =  Integer.parseInt(temp1[0].charAt(2) + "");
+            int j = genotype.length();
+            int i = genotype.getChromosome().length();
+
+            assertTrue(genotype.getChromosome(j/2-y).getGene(i/2-x).booleanValue());
+        }
     }
 }
